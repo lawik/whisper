@@ -35,6 +35,9 @@ def load_audio(file: str, sr: int = SAMPLE_RATE):
     -------
     A NumPy array containing the audio waveform, in float32 dtype.
     """
+    if file.endswith(".pcm"):
+	return np.fromfile(file, np.float32)
+
     try:
         # This launches a subprocess to decode audio while down-mixing and resampling as necessary.
         # Requires the ffmpeg CLI and `ffmpeg-python` package to be installed.
